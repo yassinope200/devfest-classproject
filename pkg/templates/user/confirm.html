@@ -1,0 +1,51 @@
+{% extends 'user/home_layout.html' %}
+
+{% block customcss %}
+  style="background-color:white;"
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  
+  <h4>Confirmation Page</h4>
+  <p>Click on the confirm button and it will take you to a page where you will input your card details...</p>
+
+  
+
+  <p> Name: {{donation_deets.donate_donor}}</p>
+
+  <p> Amount: {{donation_deets.donate_amt}}</p>
+
+  <p> Status: {{donation_deets.donate_status}}</p>
+
+  <p> Email: {{donation_deets.donate_email}}</p>
+
+  <p> Ref: {{donation_deets.donate_ref}}</p>
+
+  <form method="POST" action="/topaystack">
+
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">   
+  <button class="btn btn-info">Confirm</button>
+</form>
+ </div>
+
+ {% set m = get_flashed_messages(with_categories=True) %}
+    {% if m %}
+      {% for cat,msg in m %}
+      {% if cat =='error' %}
+        <div class="alert alert-info noround"> {{ msg }} </div>
+      {% else %}
+        <div class="alert alert-info noround"> {{ msg }} </div>
+      {% endif %}
+    {% endfor %}
+    {% endif %}
+    
+
+{% endblock content %}
+
+{% block breakout %} {% endblock %}
+
+{% block conversation %} {% endblock %}
+
+{% block partner %} {% endblock %}
+
